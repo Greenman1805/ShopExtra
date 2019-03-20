@@ -1,0 +1,9 @@
+name: ShopExtra
+main: de.greenman1805.shopextra.Main
+version: 1.0
+author: Greenman1805
+depends: [Vault]
+
+commands: 
+  shop:
+    description: Alle Shop Befehle
