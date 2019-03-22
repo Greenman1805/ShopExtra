@@ -30,7 +30,7 @@ public class Section {
 	
 	public Item getItem(ItemStack itemstack) {
 		for (Item i : items) {
-			if (i.item.getType().equals(itemstack.getType()) && i.item.getData().equals(itemstack.getData()) ) {
+			if (i.item.getType().equals(itemstack.getType())) {
 				return i;
 			}
 		}

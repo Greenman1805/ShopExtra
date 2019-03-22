@@ -6,10 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,68 +20,15 @@ public class ShopAPI {
 
 		for (Section s : Section.sections) {
 			for (String key : Main.shopitems.getConfigurationSection(s.name).getKeys(false)) {
-				String[] split = key.split("-");
-				Material type = Material.getMaterial(split[0]);
-				int data = Integer.parseInt(split[1]);
+				Material type = Material.getMaterial(key);
 				int price = Main.shopitems.getInt(s.name + "." + key + ".price");
 				int xp = Main.shopitems.getInt(s.name + "." + key + ".xp");
-				Item item = new Item(type, data, price, xp);
+				Item item = new Item(type, price, xp);
 				s.items.add(item);
 			}
 		}
 	}
 
-	public static void openShopInventory(Player p, Section s) {
-		Inventory inv = Bukkit.getServer().createInventory(null, 54, "§9" + s.name + " §9Shop");
-		if (s.items.size() > 18) {
-			System.out.println(Main.prefix + "Zu viele Items in Section: " + s.name);
-			return;
-		}
-		ItemStack sell_gap = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
-		setItemName(sell_gap, "§8▼ §4Verkaufen §8▼", null);
-
-		for (int i = 0; i < 9; i++) {
-			inv.setItem(i, sell_gap);
-		}
-
-		for (int i = 0; i < s.items.size(); i++) {
-			ItemStack item = s.items.get(i).item.clone();
-			ArrayList<String> lore_list = new ArrayList<String>();
-			lore_list.add("§fLinksklick:");
-			lore_list.add("§cEinzeln verkaufen");
-			lore_list.add("§9Shards: §f" + getItemPrice(s.items.get(i), getPlayerLevel(p)));
-			lore_list.add("§9XP: §f" + s.items.get(i).xp);
-			lore_list.add("");
-			lore_list.add("§fRechtsklick:");
-			lore_list.add("§cStack verkaufen");
-			lore_list.add("§9Shards: §f" + getItemPrice(s.items.get(i), getPlayerLevel(p)) * item.getMaxStackSize());
-			lore_list.add("§9XP: §f" + s.items.get(i).xp * item.getMaxStackSize());
-			setItemName(item, item.getItemMeta().getDisplayName(), lore_list);
-			inv.setItem(i + 9, item);
-		}
-
-		ItemStack buy_gap = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 5);
-		setItemName(buy_gap, "§8▼ §aKaufen §8▼", null);
-
-		for (int i = 27; i < 36; i++) {
-			inv.setItem(i, buy_gap);
-		}
-
-		for (int i = 0; i < s.items.size(); i++) {
-			ItemStack item = s.items.get(i).item.clone();
-			ArrayList<String> lore_list = new ArrayList<String>();
-			lore_list.add("§fLinksklick:");
-			lore_list.add("§aEinzeln kaufen");
-			lore_list.add("§9Shards: §f" + getItemPrice(s.items.get(i), 30));
-			lore_list.add("");
-			lore_list.add("§fRechtsklick:");
-			lore_list.add("§aStack kaufen");
-			lore_list.add("§9Shards: §f" + getItemPrice(s.items.get(i), 30) * item.getMaxStackSize());
-			setItemName(item, item.getItemMeta().getDisplayName(), lore_list);
-			inv.setItem(i + 36, item);
-		}
-		p.openInventory(inv);
-	}
 
 	public static void setItemName(ItemStack item, String name, ArrayList<String> lore_list) {
 		ItemMeta meta;

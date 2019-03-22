@@ -34,7 +34,6 @@ public class Main extends JavaPlugin {
 
 		checkDatabase();
 
-		getServer().getPluginManager().registerEvents(new ShopListener(), this);
 		getCommand("shop").setExecutor(new ShopCommands());
 		ShopAPI.loadSections();
 	}

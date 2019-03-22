@@ -8,13 +8,11 @@ public class Item {
 	public ItemStack item;
 	public int price;
 	public int xp;
-	short data;
 	
 	
 	
-	public Item(Material type, int data, int price, int xp) {
-		this.data = (short) data;
-		item = new ItemStack(type, 1, this.data);
+	public Item(Material type, int price, int xp) {
+		item = new ItemStack(type, 1);
 		this.price = price;
 		this.xp = xp;
 	}

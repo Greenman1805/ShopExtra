@@ -25,7 +25,7 @@ public class ShopCommands implements CommandExecutor {
 					if (args[0].equalsIgnoreCase("open")) {
 						Section s = Section.getSection(args[1]);
 						if (s != null) {
-							ShopAPI.openShopInventory(p, s);
+							new ShopGui(p, s);
 
 						} else {
 							p.sendMessage(Main.prefix + "§4Section nicht gefunden!");
