@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.milkbowl.vault.economy.Economy;
 
 public class Main extends JavaPlugin {
+	public static boolean debug = false;
 	public static Economy econ = null;
 	public static String prefix = "§f[§9Shop§f] ";
 	public static String HomeDir = System.getProperty("user.home");
@@ -41,6 +42,13 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		MySQL.closeConnection();
+	}
+	
+	
+	public static void Debug(String message) {
+		if (debug) {
+			System.out.println(message);
+		}
 	}
 
 	private void checkDatabase() {

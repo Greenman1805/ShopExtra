@@ -20,6 +20,7 @@ public class ShopAPI {
 
 		for (Section s : Section.sections) {
 			for (String key : Main.shopitems.getConfigurationSection(s.name).getKeys(false)) {
+				Main.Debug("Lade Material: " +  key);
 				Material type = Material.getMaterial(key);
 				int price = Main.shopitems.getInt(s.name + "." + key + ".price");
 				int xp = Main.shopitems.getInt(s.name + "." + key + ".xp");

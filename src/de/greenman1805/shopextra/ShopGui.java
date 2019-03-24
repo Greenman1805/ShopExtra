@@ -80,7 +80,7 @@ public class ShopGui implements Listener {
 
 	@EventHandler
 	public void clickedOnItem(InventoryClickEvent e) {
-		if (e.getInventory() == inv) {
+		if (e.getInventory().equals(inv)) {
 			int slot = e.getRawSlot();
 			if (slot >= 0 && slot <= 53) {
 				if (!e.getCurrentItem().getType().name().equalsIgnoreCase("AIR")) {

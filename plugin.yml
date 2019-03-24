@@ -1,6 +1,6 @@
 name: ShopExtra
 main: de.greenman1805.shopextra.Main
-version: 1.0
+version: 1.13
 author: Greenman1805
 depends: [Vault]
 api-version: 1.13
